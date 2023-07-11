@@ -3,7 +3,7 @@ server:
   api_key: 'iHJOBl83sdnfvsdfvpOCr39WZs'
 
 postgres:
-  uri: "postgres://postgres:password@localhost:5432/service_coin?sslmode=disable"
+  uri: "postgres://postgres:password@localhost:5432/product?sslmode=disable"
   conn_max_lifetime_minute: 1
   max_open_conn: 10
 
