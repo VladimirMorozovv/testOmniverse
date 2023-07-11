@@ -1,0 +1,101 @@
+openapi: 3.0.0
+info:
+  title: Service API
+  version: '1.0.0'
+servers:
+  - url: http://localhost:5000/
+    description: Dev server
+paths:
+
+  /:
+    get:
+      summary: Запрос на получение списка продуктов
+      tags:
+        - Service API
+      operationId: get products
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          example: 100
+          description: максимальное колличество продуктов в списке
+        - in: query
+          name: offset
+          schema:
+            type: integer
+          example: 1000
+          description: смещение получаемого списка
+      responses:
+        "200":
+          description: Успешный ответ с получением данных по продуктам
+          content:
+            application/json:
+              schema:
+                  type: array
+                  items:
+                        $ref: '#/components/schemas/product'
+        "400":
+          description: При остутсвии или неправильном параметре передаваемых в заголовках запроса
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: Invalid api key
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Внутренняя проблема сервера
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /api/health/live:
+    get:
+      tags:
+        - Health
+      summary: Health live
+      responses:
+        '200':
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "Healthy"
+
+  /api/health/readiness:
+    get:
+      tags:
+        - Health
+      summary: Health readiness
+      responses:
+        '200':
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "Healthy"
+
+
+components:
+  schemas:
+    ErrorResponse:
+      properties:
+        error:
+          type: string
+          example: Message error
+          description: Message error
+
+    product:
+      properties:
+        id:
+          type: string
+          example: product1
+        price:
+          type: integer
+          example: 100

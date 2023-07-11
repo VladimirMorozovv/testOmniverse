@@ -1,0 +1,12 @@
+server:
+  port: '8080'
+  api_key: 'iHJOBl83sdnfvsdfvpOCr39WZs'
+
+postgres:
+  uri: "postgres://postgres:password@localhost:5432/service_coin?sslmode=disable"
+  conn_max_lifetime_minute: 1
+  max_open_conn: 10
+
+cache:
+  ttl_second: 10
+  size: 1000
