@@ -23,6 +23,13 @@ func NewCacheInMemory(countSize int, ttlSecond int) (*CacheInMemory, error) {
 	}, nil
 }
 
+/*
+Изменил логику работы не в соответствии с тех. заданием , так как для данной задачи по тз теряется консистентность данных,
+а так же появляется возможность упереться в оперативную память
+
+Могу переделать в соответвии с тех заданием и сделать опережающий кэш если потребуется.
+*/
+
 func (c *CacheInMemory) Get(ctx context.Context, key model.Params, store storage.IStorageSQL) ([]storage.Product, error) {
 	value, ok := c.cache.Get(key)
 	if !ok {
