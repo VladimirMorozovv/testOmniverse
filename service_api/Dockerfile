@@ -13,7 +13,7 @@ RUN go mod verify
 COPY . .
 RUN go build -v -o app cmd/apiserver/main.go
 
-FROM harbor.yarustech.ru/development-irus/backend-v2/golang:1.18
+FROM golang:1.18
 
 WORKDIR /application
 RUN mkdir /configs
